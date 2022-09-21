@@ -41,19 +41,14 @@ jobs:
           echo Add other actions to build,
           ech test, and deploy your project.
           
-      - name: Notify about failure
+      - name: Failure
         if: ${{ failure() }}
         run: |
            cat << EOF > message.json
            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow failed!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY workflow failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
            EOF
             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
-      - name: Notify about success
-        run: |
-           cat << EOF > message.json
-           {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow success!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow success ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"}{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
-           EOF
-            curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+      
       - name: Success
         run: |
            cat << EOF > message.json
