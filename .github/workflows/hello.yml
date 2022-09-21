@@ -10,7 +10,7 @@ on:
       - main
   push:
     branches:
-      - test
+      - AQA-add-Some-test
 
   # Allows you to run this workflow manually from the Actions tab
 
