@@ -40,16 +40,17 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
       - name: Notify about failure
         if: ${{ failure() }}
         run: |
            cat << EOF > message.json
            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow failed!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY pipeline failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
            EOF
-            curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+            curl -X POST https://enginebcom.webhook.office.com/webhookb2/abfff974-572e-4ad5-ad94-e827d6c81896@070927bf-7189-4b3c-99b5-60f306d9b138/IncomingWebhook/2c46ec16a22b4f59af42c7159ec0cdf7/8d733b55-6dd3-4b0f-ae02-55b0ca721a4e --header 'Content-Type: application/json' -d @message.json
       - name: Notify about success
         run: |
            cat << EOF > message.json
            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow success!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY pipeline success ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"}{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
            EOF
-           curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+           curl -X POST https://enginebcom.webhook.office.com/webhookb2/abfff974-572e-4ad5-ad94-e827d6c81896@070927bf-7189-4b3c-99b5-60f306d9b138/IncomingWebhook/2c46ec16a22b4f59af42c7159ec0cdf7/8d733b55-6dd3-4b0f-ae02-55b0ca721a4e --header 'Content-Type: application/json' -d @message.json
