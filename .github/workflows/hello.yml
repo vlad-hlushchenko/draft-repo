@@ -57,6 +57,6 @@ jobs:
       - name: Success
         run: |
            cat << EOF > message.json
-           {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow success!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY pipeline failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
+           {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow success!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY pipeline success ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
            EOF
             curl -X POST https://enginebcom.webhook.office.com/webhookb2/abfff974-572e-4ad5-ad94-e827d6c81896@070927bf-7189-4b3c-99b5-60f306d9b138/IncomingWebhook/b6cf2df4e9484c1c9f3d5dde1c9ab4de/8d733b55-6dd3-4b0f-ae02-55b0ca721a4e --header 'Content-Type: application/json' -d @message.json
