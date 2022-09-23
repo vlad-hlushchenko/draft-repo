@@ -66,15 +66,15 @@ jobs:
 
 
 # curl \
-#   -H "Accept: application/vnd.github+json" \ 
-#   -H "Authorization: Bearer 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" \
-#   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
+# #   -H "Accept: application/vnd.github+json" \ 
+# #   -H "Authorization: Bearer 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" \
+# #   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
 
-  # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
+#   # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
 
 
-  curl -H "Accept: application/vnd.github.everest-preview+json" \
-    -H "Authorization: token Bearer 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" \
-    --request POST \
-    --data '{"event_type": "event-trigger"}' \
-    https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
+#   curl -H "Accept: application/vnd.github.everest-preview+json" \
+#     -H "Authorization: token Bearer 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" \
+#     --request POST \
+#     --data '{"event_type": "event-trigger"}' \
+#     https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
