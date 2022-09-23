@@ -58,7 +58,7 @@ jobs:
         run: |
           ls
           cat 2.txt
-          echo JIRA number is ${{ github.event.client_payload.jira-name }}
+          echo JIRA number is ${{ github.event.client_payload.jira-issue }}
           
 #       - name: Failure
 #         if: ${{ failure() }}
