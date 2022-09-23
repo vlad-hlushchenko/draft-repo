@@ -40,12 +40,13 @@ jobs:
 
           
 
-# {
-#   "event_type": "event-trigger"
-#   "client_payload": {
-#     "jira-issue": "{{issue.key}}"
-#   }
-# }
+{
+  "event_type": "event-trigger",
+  "client_payload": {
+    "jira-issue": "{{issue.key}}",
+    "jira-name": "{{}issue.name}}"
+  }
+}
 
 
 # curl \
