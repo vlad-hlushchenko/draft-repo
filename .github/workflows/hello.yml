@@ -35,12 +35,12 @@ jobs:
         with:
           # Repository name with owner. For example, actions/checkout
           # Default: ${{ github.repository }}
-          repository: 'Vlad-Hlushchenko/Environment'
+          repository: Vlad-Hlushchenko/Environment
 
           # The branch, tag or SHA to checkout. When checking out the repository that
           # triggered a workflow, this defaults to the reference or SHA for that event.
           # Otherwise, uses the default branch.
-          ref: '${{ github.event.client_payload.jira-name }}'
+          ref: ${{ github.event.client_payload.jira-name }}
 
           # Personal access token (PAT) used to fetch the repository. The PAT is configured
           # with the local git config, which enables your scripts to run authenticated git
@@ -52,7 +52,7 @@ jobs:
           # [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
           #
           # Default: ${{ github.token }}
-          token: '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'
+          token: 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
         
 
       # Runs a set of commands using the runners shell
