@@ -36,7 +36,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo JIRA number is ${{ github.event.client_payload.jira-issue }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
@@ -47,6 +47,9 @@ jobs:
 
 # {
 #   "event_type": "event-trigger"
+#   "client_payload":{
+#     "jira-issue": "{{issue.key}}"
+#   }
 # }
 
 
