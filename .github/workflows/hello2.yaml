@@ -34,31 +34,55 @@ jobs:
       - uses: actions/checkout@v3
         
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo JIRA number is ${{ github.event.client_payload.jira-issue }}
-
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+    
           
+#       - name: Failure
+#         if: ${{ failure() }}
+#         run: |
+#            cat << EOF > message.json
+#            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow failed!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY workflow failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
+#            EOF
+#             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+      
+#       - name: Successful
+#         run: |
+#            cat << EOF > message.json
+#            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow successful!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow successful ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
+#            EOF
+#             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
 
-{
-  "event_type": "event-trigger",
-  "client_payload": {
-    "jira-issue": "{{issue.key}}",
-    "jira-name": "{{}issue.name}}"
-  }
-}
-
+# {
+#   "event_type": "event-trigger"
+# }
+# {
+#   "event_type": "event-trigger"
+#   "client_payload":{
+#     "jira-issue": "{{issue.key}}"
+#   }
+# }
+# {
+#   "event_type": "event-trigger"
+#   "client_payload":{
+#     "jira-issue": "{{issue.key}}"
+#   }
+# }
 
 # curl \
-#   -H "Accept: application/vnd.github+json" \ 
-#   -H "Authorization: Bearer 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" \
-#   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
+# #   -H "Accept: application/vnd.github+json" \ 
+# #   -H "Authorization: Bearer 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" \
+# #   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
 
-  # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
+#   # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
 
 
-  # curl -H "Accept: application/vnd.github.everest-preview+json" \
-  #   -H "Authorization: token Bearer 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" \
-  #   --request POST \
-  #   --data '{"event_type": "event-trigger"}' \
-  #   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
+#   curl -H "Accept: application/vnd.github.everest-preview+json" \
+#     -H "Authorization: token Bearer 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" \
+#     --request POST \
+#     --data '{"event_type": "event-trigger"}' \
+#     https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
