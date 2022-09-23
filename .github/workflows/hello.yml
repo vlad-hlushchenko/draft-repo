@@ -3,19 +3,17 @@
 name: CI
 
 # Controls when the workflow will run
-on:
+on: repository_dispatch
 
-  workflow_dispatch:
-    branches:
-      - main
-  push:
-    branches:
-      - AQA-add-Some-test
-      - test
-      - main
-  repository_dispatch:
-    # this is the event_type passed in from the webhook, needs to match exactly what was defined in the webhook custom data payload
-    types: [ "event-trigger" ]
+  # workflow_dispatch:
+  #   branches:
+  #     - main
+  # push:
+  #   branches:
+  #     - AQA-add-Some-test
+  #     - test
+  #     - main
+  
       
 
   # Allows you to run this workflow manually from the Actions tab
@@ -58,3 +56,15 @@ jobs:
            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow successful!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow successful ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
            EOF
             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+
+# {
+#   "event_type": "event-trigger"
+# }
+
+
+# curl \
+#   -H "Accept: application/vnd.github+json" \ 
+#   -H "Authorization: Bearer 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" \
+#   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
+
+  # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
