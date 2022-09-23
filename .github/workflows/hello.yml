@@ -13,6 +13,9 @@ on:
       - AQA-add-Some-test
       - test
       - main
+  repository_dispatch:
+    # this is the event_type passed in from the webhook, needs to match exactly what was defined in the webhook custom data payload
+    types: [ "event-trigger" ]
       
 
   # Allows you to run this workflow manually from the Actions tab
@@ -49,7 +52,7 @@ jobs:
            EOF
             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
       
-      - name: Success
+      - name: Successful
         run: |
            cat << EOF > message.json
            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow successful!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow successful ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
