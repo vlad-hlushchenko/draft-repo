@@ -61,7 +61,7 @@ jobs:
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
       - name: move ticket to test
         run: |
-          curl  -X POST -u klonlacy@gmail.com:Mli98PH47AAxv3nSNodo3164 -d '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' https://gklonua.atlassian.net/rest/api/3/issue/${{ github.event.client_payload.jira-issue }}/transitions
+          curl  -X POST -u klonlacy@gmail.com:7wkMLxxStVw5ZRZ5fmCwC204-d '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' https://gklonua.atlassian.net/rest/api/3/issue/${{ github.event.client_payload.jira-issue }}/transitions
           
 #       - name: Failure
 #         if: ${{ failure() }}
