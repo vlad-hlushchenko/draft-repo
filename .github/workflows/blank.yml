@@ -23,7 +23,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: | 
-          curl  -X POST -u klonlacy@gmail.com:7wkMLxxStVw5ZRZ5fmCwC204 --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/3/issue/AS-15/transitions
+          curl  -X POST -u klonlacy@gmail.com:Ew9Yhnp9VMZUq034RHYt53D0 --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/3/issue/AS-15/transitions
 
 
       # Runs a set of commands using the runners shell
