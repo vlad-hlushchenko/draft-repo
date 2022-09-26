@@ -59,6 +59,8 @@ jobs:
           ls
           cat 2.txt
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+      - name: move ticket to test
+        run: curl  -X POST -u klonlacy@gmail.com:Mli98PH47AAxv3nSNodo3164 -s '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' --header 'Content-Type: application/json'
           
 #       - name: Failure
 #         if: ${{ failure() }}
