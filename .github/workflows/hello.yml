@@ -57,6 +57,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          echo ${{ github.event.client_payload.jira-name }}
       - name: move ticket to test
         run: |
           curl  -X POST -u klonlacy@gmail.com:tQSxjjyao3Vj7c0Hwxw5BAAD --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/transitions
