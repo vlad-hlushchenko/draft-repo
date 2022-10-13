@@ -26,7 +26,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      build_name: ${{ github.event.client_payload.jira-issue }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
@@ -57,6 +58,7 @@ jobs:
       - name: Chagne envs
         run: |
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          echo ${{ env.build_name }}
           sed -i "s/example/${{ github.event.client_payload.jira-issue }}/g" var.txt  && sed -i "s/[A-Z]/\L&/g" var.txt && sed -i "s/-//g" var.txt
           echo  12312 is ${{ github.event.client_payload.jira-name }}
           cat var.txt
