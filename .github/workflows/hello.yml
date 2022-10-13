@@ -54,10 +54,12 @@ jobs:
         
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Chagne envs
         run: |
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          sed -i "s/example/${{ github.event.client_payload.jira-issue }}/g" var.txt  && sed -i "s/[A-Z]/\L&/g" var.txt && sed -i "s/-//g" var.txt
           echo  12312 is ${{ github.event.client_payload.jira-name }}
+          cat var.txt
       - name: add info for build
         run: |
           curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/comment -X POST --data '{"body": "commit code '$GITHUB_SHA'"}' -H "Content-Type: application/json"
