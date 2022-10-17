@@ -1,116 +1,116 @@
-# This is a basic workflow to help you get started with Actions
+# # This is a basic workflow to help you get started with Actions
 
-name: CI
+# name: CI
 
-# Controls when the workflow will run
-on:
-  repository_dispatch:
-    types: event-trigger
+# # Controls when the workflow will run
+# on:
+#   repository_dispatch:
+#     types: event-trigger
 
-  # workflow_dispatch:
-  #   branches:
-  #     - main
-  # push:
-  #   branches:
-  #     - AQA-add-Some-test
-  #     - test
-  #     - main
+#   # workflow_dispatch:
+#   #   branches:
+#   #     - main
+#   # push:
+#   #   branches:
+#   #     - AQA-add-Some-test
+#   #     - test
+#   #     - main
   
       
 
-  # Allows you to run this workflow manually from the Actions tab
+#   # Allows you to run this workflow manually from the Actions tab
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    env:
-      build_name: ${{ github.event.client_payload.jira-issue }}
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
+#     env:
+#       build_name: ${{ github.event.client_payload.jira-issue }}
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
 
-#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-#         with:
-#           # Repository name with owner. For example, actions/checkout
-#           # Default: ${{ github.repository }}
-#           # The branch, tag or SHA to checkout. When checking out the repository that
-#           # triggered a workflow, this defaults to the reference or SHA for that event.
-#           # Otherwise, uses the default branch.
-#           ref: ${{ github.event.client_payload.jira-name }}
+# #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
+# #         with:
+# #           # Repository name with owner. For example, actions/checkout
+# #           # Default: ${{ github.repository }}
+# #           # The branch, tag or SHA to checkout. When checking out the repository that
+# #           # triggered a workflow, this defaults to the reference or SHA for that event.
+# #           # Otherwise, uses the default branch.
+# #           ref: ${{ github.event.client_payload.jira-name }}
 
-          # Personal access token (PAT) used to fetch the repository. The PAT is configured
-          # with the local git config, which enables your scripts to run authenticated git
-          # commands. The post-job step removes the PAT.
-          #
-          # We recommend using a service account with the least permissions necessary. Also
-          # when generating a new PAT, select the least scopes necessary.
-          #
-          # [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
-          #
-          # Default: ${{ github.token }}
-          # token: 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
+#           # Personal access token (PAT) used to fetch the repository. The PAT is configured
+#           # with the local git config, which enables your scripts to run authenticated git
+#           # commands. The post-job step removes the PAT.
+#           #
+#           # We recommend using a service account with the least permissions necessary. Also
+#           # when generating a new PAT, select the least scopes necessary.
+#           #
+#           # [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+#           #
+#           # Default: ${{ github.token }}
+#           # token: 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
         
 
-      # Runs a set of commands using the runners shell
-      - name: Chagne envs
-        run: |
-          echo JIRA number is ${{ github.event.client_payload.jira-issue }}
-          echo ${{ env.build_name }}
-          sed -i "s/example/${{ github.event.client_payload.jira-issue }}/g" var.txt  && sed -i "s/[A-Z]/\L&/g" var.txt && sed -i "s/-//g" var.txt
-          echo  12312 is ${{ github.event.client_payload.jira-name }}
-          cat var.txt
-      - name: add info for build
-        run: |
-          curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/field -X POST --data '{"body": "commit code '$GITHUB_SHA'"}' -H "Content-Type: application/json"
-          curl  -X POST -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/transitions
-#          curl  -X POST -u klonlacy@gmail.com:EUd34ivaaoVL22l6N4xzB97F -d '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' https://gklonua.atlassian.net/rest/api/3/issue/${{ github.event.client_payload.jira-issue }}/transitions
-      - name: echo jira descr
-        run: |
-          echo description is ${{ github.event.client_payload.jira-description }}
-#       - name: Failure
-#         if: ${{ failure() }}
+#       # Runs a set of commands using the runners shell
+#       - name: Chagne envs
 #         run: |
-#            cat << EOF > message.json
-#            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow failed!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY workflow failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
-#            EOF
-#             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+#           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+#           echo ${{ env.build_name }}
+#           sed -i "s/example/${{ github.event.client_payload.jira-issue }}/g" var.txt  && sed -i "s/[A-Z]/\L&/g" var.txt && sed -i "s/-//g" var.txt
+#           echo  12312 is ${{ github.event.client_payload.jira-name }}
+#           cat var.txt
+#       - name: add info for build
+#         run: |
+#           curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/field -X POST --data '{"body": "commit code '$GITHUB_SHA'"}' -H "Content-Type: application/json"
+#           curl  -X POST -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/transitions
+# #          curl  -X POST -u klonlacy@gmail.com:EUd34ivaaoVL22l6N4xzB97F -d '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' https://gklonua.atlassian.net/rest/api/3/issue/${{ github.event.client_payload.jira-issue }}/transitions
+#       - name: echo jira descr
+#         run: |
+#           echo description is ${{ github.event.client_payload.jira-description }}
+# #       - name: Failure
+# #         if: ${{ failure() }}
+# #         run: |
+# #            cat << EOF > message.json
+# #            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow failed!","themeColor":"ff0000","title":"$GITHUB_REPOSITORY workflow failed 💢!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
+# #            EOF
+# #             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
       
-#       - name: Successful
-#         run: |
-#            cat << EOF > message.json
-#            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow successful!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow successful ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
-#            EOF
-#             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
+# #       - name: Successful
+# #         run: |
+# #            cat << EOF > message.json
+# #            {"@type":"MessageCard","@context":"https://schema.org/extensions","summary":"Workflow successful!","themeColor":"#5ad027","title":"$GITHUB_REPOSITORY workflow successful ✅!","sections":[{"facts":[{"name":"Repository:","value":"$GITHUB_REPOSITORY"},{"name":"Branch:","value":"$GITHUB_REF_NAME"},{"name":"Commit:","value":"$GITHUB_SHA"}]}],"potentialAction":[{"@type":"OpenUri","name":"View on GitHub","targets":[{"os":"default","uri":"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"}]}]}
+# #            EOF
+# #             curl -X POST ${{ secrets.TEAMS_WEBHOOK }} --header 'Content-Type: application/json' -d @message.json
 
-# {
-#   "event_type": "event-trigger"
-# }
-# {
-#   "event_type": "event-trigger"
-#   "client_payload":{
-#     "jira-issue": "{{issue.key}}"
-#   }
-# }
-# {
-#   "event_type": "event-trigger"
-#   "client_payload":{
-#     "jira-issue": "{{issue.key}}"
-#   }
-# }
+# # {
+# #   "event_type": "event-trigger"
+# # }
+# # {
+# #   "event_type": "event-trigger"
+# #   "client_payload":{
+# #     "jira-issue": "{{issue.key}}"
+# #   }
+# # }
+# # {
+# #   "event_type": "event-trigger"
+# #   "client_payload":{
+# #     "jira-issue": "{{issue.key}}"
+# #   }
+# # }
 
-# curl \
-# #   -H "Accept: application/vnd.github+json" \ 
-# #   -H "Authorization: Bearer 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" \
-# #   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
+# # curl \
+# # #   -H "Accept: application/vnd.github+json" \ 
+# # #   -H "Authorization: Bearer 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" \
+# # #   https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/actions/runs
 
-#   # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
+# #   # curl   -X POST   -H "Accept: application/vnd.github+json" -H "Authorization: Bearer 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" https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches -d '{"event_type":"event-trigger","client_payload":{"unit":false,"integration":true}}'
 
 
-#   curl -H "Accept: application/vnd.github.everest-preview+json" \
-#     -H "Authorization: token Bearer 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" \
-#     --request POST \
-#     --data '{"event_type": "event-trigger"}' \
-#     https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
+# #   curl -H "Accept: application/vnd.github.everest-preview+json" \
+# #     -H "Authorization: token Bearer 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" \
+# #     --request POST \
+# #     --data '{"event_type": "event-trigger"}' \
+# #     https://api.github.com/repos/Vlad-Hlushchenko/draft-repo/dispatches
