@@ -40,6 +40,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
+          echo env is ${{ github.event.client_payload.jira-env }}
     
           
 #       - name: Failure
