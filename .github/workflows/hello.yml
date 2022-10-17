@@ -67,7 +67,9 @@ jobs:
           curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/field -X POST --data '{"body": "commit code '$GITHUB_SHA'"}' -H "Content-Type: application/json"
           curl  -X POST -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} --data '{"transition":{"id":"2"}}' -H "Content-Type: application/json" https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }}/transitions
 #          curl  -X POST -u klonlacy@gmail.com:EUd34ivaaoVL22l6N4xzB97F -d '{"transition":{"id":"2"}}' --header 'Content-Type: application/json' https://gklonua.atlassian.net/rest/api/3/issue/${{ github.event.client_payload.jira-issue }}/transitions
-          
+      - name: echo jira descr
+        run: |
+          echo description is github.event.client_payload.jira-description
 #       - name: Failure
 #         if: ${{ failure() }}
 #         run: |
