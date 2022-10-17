@@ -42,7 +42,7 @@ jobs:
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
           echo env is ${{ github.event.client_payload.jira-env }}
            curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }} -X PUT \
-           --data '{"description": "From the order testing process"}' \
+           --data '{"fields":{"description":"description changed"}}' \
     #       -H "Content-Type: application/json"
     
           
