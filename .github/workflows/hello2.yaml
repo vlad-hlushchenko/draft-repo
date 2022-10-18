@@ -42,7 +42,7 @@ jobs:
           echo JIRA number is ${{ github.event.client_payload.jira-issue }}
           echo env is ${{ github.event.client_payload.jira-env }}
            curl -D- -u klonlacy@gmail.com:${{ secrets.JIRA_TOKEN }} https://gklonua.atlassian.net/rest/api/2/issue/${{ github.event.client_payload.jira-issue }} \
-           -X PUT --data '{"fields":{"description":"jira issue key : ${{ github.event.client_payload.jira-issue }} "}}' -H "Content-Type: application/json"
+           -X PUT --data '{"fields":{"description":"google: https://google.com/ "}}' -H "Content-Type: application/json"
     
           
 #       - name: Failure
